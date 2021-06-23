@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 /**
  *
@@ -20,22 +21,44 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Registro extends javax.swing.JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private Object lista;
-    private Object txtbuscar;
-    private Object txtBuscar;
-    private Object nombre;
-    private Object Nombre;
-
+    //private static final long serialVersionUID = 1L;
+    // private Object lista;
+    // private Object txtbuscar;
+    //private Object txtBuscar;
+    //private Object nombre;
+    // private Object Nombre;
     /**
      * Creates new form Registro
      */
-    ArrayList<AgendaClientes>listaBUSCAR=new ArrayList<AgendaClientes>();
-    private Object JoptionPane;
-    private Object JOption;
+    List<AgendaClientes> listaBUSCAR = new ArrayList<>();
+    //private Object JoptionPane;
+    //private Object JOption;
+    //private Object bf;
+    //private Object listaBuscar;
+
+    public void TablaInfo() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Edad");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+        for (AgendaClientes c : listaBUSCAR) {
+
+            Object[] buscador = new Object[5];
+            buscador[0] = c.getId();
+            buscador[1] = c.getNombre();
+            buscador[2] = c.getEdad();
+            buscador[3] = c.getTelefono();
+            buscador[4] = c.getCorreo();
+            modelo.addRow(buscador);
+        }
+        AgendaDeClientes.setModel(modelo);
+    }
 
     public Registro() {
         initComponents();
+        TablaInfo();
         this.AgendaDeClientes.setModel(modelo);
         this.modelo.addColumn("Id");
         this.modelo.addColumn("Nombre");
@@ -55,8 +78,6 @@ public class Registro extends javax.swing.JFrame {
     private void initComponents() {
 
         txtagenda = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        AgendaDeClientes = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -73,32 +94,15 @@ public class Registro extends javax.swing.JFrame {
         btnagregar = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         txtbuscardor = new javax.swing.JTextField();
+        btninfo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        AgendaDeClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtagenda.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         txtagenda.setForeground(new java.awt.Color(0, 0, 153));
         txtagenda.setText("Agenda de Clientes");
-
-        AgendaDeClientes.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
-        AgendaDeClientes.setForeground(new java.awt.Color(255, 0, 0));
-        AgendaDeClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        AgendaDeClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AgendaDeClientesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(AgendaDeClientes);
 
         jLabel2.setBackground(new java.awt.Color(102, 255, 255));
         jLabel2.setForeground(new java.awt.Color(153, 0, 153));
@@ -119,8 +123,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 0, 0));
         jLabel6.setText("Correo");
 
-        txtid.setBackground(new java.awt.Color(255, 51, 255));
-        txtid.setForeground(new java.awt.Color(153, 0, 153));
+        txtid.setBackground(new java.awt.Color(255, 0, 255));
         txtid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtidActionPerformed(evt);
@@ -128,7 +131,6 @@ public class Registro extends javax.swing.JFrame {
         });
 
         txtnombre.setBackground(new java.awt.Color(204, 204, 255));
-        txtnombre.setForeground(new java.awt.Color(51, 51, 255));
         txtnombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombreActionPerformed(evt);
@@ -136,7 +138,6 @@ public class Registro extends javax.swing.JFrame {
         });
 
         txtedad.setBackground(new java.awt.Color(255, 102, 102));
-        txtedad.setForeground(new java.awt.Color(0, 253, 0));
         txtedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtedadActionPerformed(evt);
@@ -144,10 +145,8 @@ public class Registro extends javax.swing.JFrame {
         });
 
         txttelefono.setBackground(new java.awt.Color(204, 255, 255));
-        txttelefono.setForeground(new java.awt.Color(255, 153, 255));
 
         txtcorreo.setBackground(new java.awt.Color(255, 204, 204));
-        txtcorreo.setForeground(new java.awt.Color(255, 255, 0));
         txtcorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcorreoActionPerformed(evt);
@@ -210,79 +209,107 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
+        btninfo.setText("InfoC");
+        btninfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninfoActionPerformed(evt);
+            }
+        });
+
+        AgendaDeClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        AgendaDeClientes.setEnabled(false);
+        AgendaDeClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AgendaDeClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(AgendaDeClientes);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(58, 58, 58)
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtnombre)
-                                    .addComponent(txtedad))))
-                        .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnagregar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txttelefono)
-                            .addComponent(txtcorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                        .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btcsalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnguardar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtbuscardor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(58, 58, 58)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addGap(32, 32, 32)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtnombre)
+                                .addComponent(txtedad)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
+                            .addGap(28, 28, 28)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txttelefono)
+                                .addComponent(txtcorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btninfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnagregar, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                    .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btcsalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtbuscardor)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtagenda)
-                .addGap(156, 156, 156))
+                .addGap(266, 266, 266))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtagenda, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
-                    .addComponent(txtbuscardor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnagregar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btneliminar))
+                    .addComponent(txtbuscardor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(btnagregar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtnombre)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(btneliminar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -293,7 +320,9 @@ public class Registro extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnguardar))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(btninfo)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,25 +330,44 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //TODO add your handling code here:
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Edad");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+        for (AgendaClientes c : listaBUSCAR) {
+            if (c.getNombre().equals(txtbuscardor.getText())) {
+                Object[] buscador = new Object[5];
+                buscador[0] = c.getId();
+                buscador[1] = c.getNombre();
+                buscador[2] = c.getEdad();
+                buscador[3] = c.getTelefono();
+                buscador[4] = c.getCorreo();
+                 modelo.addRow(buscador);
+            }
+        }
+        AgendaDeClientes.setModel(modelo);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
-        int fila_seleccionada = AgendaDeClientes.getSelectedRow();
-        if (fila_seleccionada >= 0) {
-            modelo.removeRow(fila_seleccionada);
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccionar la fila a eliminar");
+        String rps = JOptionPane.showInputDialog("Insertar Nombre");
+        for (AgendaClientes c : listaBUSCAR) {
+            if (c.getNombre().equals(rps)) {
+                listaBUSCAR.remove(c);
+                TablaInfo();
+            }
         }
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
         // TODO add your handling code here:
-        this.txtid.setText("");
-        this.txtnombre.setText("");
-        this.txtedad.setText("");
-        this.txttelefono.setText("");
-        this.txtcorreo.setText(""); 
+        //this.txtid.setText("");
+        //this.txtnombre.setText("");
+        //this.txtedad.setText("");
+        //this.txttelefono.setText("");
+        //this.txtcorreo.setText("");
 
     }//GEN-LAST:event_btnagregarActionPerformed
 
@@ -335,17 +383,6 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtedadActionPerformed
 
-    private void AgendaDeClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgendaDeClientesMouseClicked
-        // TODO add your handling code here:
-        int fila_seleccionada = AgendaDeClientes.getSelectedRow();
-        txtid.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 0).toString());
-        txtnombre.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 1).toString());
-        txtedad.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 2).toString());
-        txttelefono.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 3).toString());
-        txtcorreo.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 4).toString());
-        //filas=fila_seleccionada;
-    }//GEN-LAST:event_AgendaDeClientesMouseClicked
-
     private void btcsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcsalirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
@@ -353,20 +390,29 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        this.modelo.addRow(new Object[]{this.txtid.getText(), this.txtnombre.getText(),
-            this.txtedad.getText(), this.txtcorreo.getText(), this.txttelefono.getText()});
-
-        this.txtid.setText("");
-        this.txtnombre.setText("");
-        this.txtedad.setText("");
-        this.txtcorreo.setText("");
-        this.txttelefono.setText("");
-        txtid.grabFocus();
+        AgendaClientes bjs = new AgendaClientes();
+        bjs.setId(Integer.parseInt(txtid.getText()));
+        bjs.setNombre(txtnombre.getText());
+        bjs.setEdad(Integer.parseInt(txtedad.getText()));
+        bjs.setTelefono(txttelefono.getText());
+        bjs.setCorreo(txtcorreo.getText());
+        listaBUSCAR.add(bjs);
+        txtid.setText("");
+        txtnombre.setText("");
+        txtedad.setText("");
+        txttelefono.setText("");
+        txtcorreo.setText("");
+        TablaInfo();
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txtbuscardorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscardorActionPerformed
         // TODO add your handling code here:
-      
+        // int fila_seleccionada = AgendaDeClientes.getSelectedRow();
+        // txtid.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 0).toString());
+        //txtnombre.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 1).toString());
+        // txtedad.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 2).toString());
+        // txttelefono.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 3).toString());
+        // txtcorreo.setText(AgendaDeClientes.getValueAt(fila_seleccionada, 4).toString());
     }//GEN-LAST:event_txtbuscardorActionPerformed
 
     private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
@@ -376,6 +422,15 @@ public class Registro extends javax.swing.JFrame {
     private void txtbuscardorCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtbuscardorCaretUpdate
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbuscardorCaretUpdate
+
+    private void btninfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninfoActionPerformed
+        // TODO add your handling code here:
+        TablaInfo();
+    }//GEN-LAST:event_btninfoActionPerformed
+
+    private void AgendaDeClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgendaDeClientesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AgendaDeClientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -419,12 +474,13 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JButton btnagregar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
+    private javax.swing.JButton btninfo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel txtagenda;
     private javax.swing.JTextField txtbuscardor;
     private javax.swing.JTextField txtcorreo;

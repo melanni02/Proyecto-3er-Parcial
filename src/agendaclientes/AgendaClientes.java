@@ -13,6 +13,10 @@ import javax.swing.JButton;
  */
 public class AgendaClientes {
 
+    static Object get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -28,6 +32,9 @@ public class AgendaClientes {
         this.Edad = Edad;
         this.Telefono = Telefono;
         this.Correo = Correo;
+    }
+
+    AgendaClientes() {
     }
 
     public int getId() {
@@ -68,6 +75,26 @@ public class AgendaClientes {
 
     public void setCorreo(String Correo) {
         this.Correo = Correo;
+    }
+
+    void getTextId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void getTextNombre() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void getTextEdad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void getTextTelefono() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void getTextCorreo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
